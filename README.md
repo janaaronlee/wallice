@@ -1,2 +1,2 @@
 # wallice
-An opinionated AWS Lambda framework built on top of Chalice.
+An opinionated AWS Lambda web framework built on top of Chalice.
