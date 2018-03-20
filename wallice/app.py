@@ -1,6 +1,5 @@
 from chalice import Chalice
 
-from wallice.config import Config
 from wallice.routers import ImplicitRouter
 
 
@@ -11,11 +10,5 @@ class Wallice(Chalice):
 
     def __init__(self, router=ImplicitRouter, *args, **kwargs):
 
-        self.config.update(kwargs)
-        super().__init__(*args, **self.config)
+        super().__init__(*args, **kwargs)
         router(self)
-
-    @property
-    def config(self):
-        config = Config()
-        return config['app']
