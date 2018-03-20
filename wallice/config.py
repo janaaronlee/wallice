@@ -3,7 +3,7 @@ import yaml
 
 class Config(dict):
 
-    def __init__(self, config_file='config.yml'):
+    def __init__(self, config_file='chalicelib/config.yml'):
 
         with open(config_file, 'r') as f:
             yaml_data = f.read()
