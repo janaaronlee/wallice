@@ -8,8 +8,7 @@ with open('README.md') as readme_file:
 
 
 install_requires = [
-    'chalice==1.1.1',
-    'pyyaml==3.12'
+    'chalice==1.1.1'
 ]
 
 setup(
