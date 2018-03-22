@@ -23,7 +23,10 @@ class ImplicitRouter(BaseRouter):
         if route_name.endswith('/'):
             route_name = route_name[:-1]
 
-        return '/{}'.format(route_name)
+        if not route_name.startswith('/'):
+            route_name = '/{}'.format(route_name)
+
+        return route_name
 
     def get_methods(self, root, file):
         methods = {}
