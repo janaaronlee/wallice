@@ -13,7 +13,7 @@ install_requires = [
 
 setup(
     name='wallice',
-    version='1.1.1',
+    version='0.1.2',
     description="Opinionated AWS Lambda web framework",
     long_description=README,
     author="Jan Aaron Angelo T. Lee",
