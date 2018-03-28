@@ -16,7 +16,7 @@ class Wallice(Chalice):
     lib_dir = 'chalicelib'
 
     def __init__(self, router=ImplicitRouter, *args, **kwargs):
-
+        kwargs.setdefault('debug', bool(os.environ.get('debug', True)))
         super().__init__(*args, **kwargs)
         self.add_lambdas(self.lambdas)
         router(self)

@@ -23,7 +23,7 @@ class BaseRouter(ABC):
             for method, function in methods.items():
                 name = '{}_{}'.format(path.replace('/', '_'), method[:-1])
                 self.app._add_route(
-                    path, function,
+                    path, self.wrap(function),
                     methods=[method], name=name
                 )
                 registered_routes.setdefault(path, [])
