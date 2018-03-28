@@ -29,7 +29,10 @@ class Wallice(Chalice):
     def lambdas(self):
         for handler_name, functions in walk(self.lambdas_dir):
             handler_name = handler_name.replace('.', '-')
-            yield handler_name, dict(functions)['lambda_handler']
+            functions = dict(functions)
+
+            if 'lambda_handler' in functions:
+                yield handler_name, functions['lambda_handler']
 
     def add_lambdas(self, lambdas):
         registered_lambdas = []
