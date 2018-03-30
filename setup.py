@@ -8,7 +8,9 @@ with open('README.md') as readme_file:
 
 
 install_requires = [
-    'chalice==1.1.1'
+    'chalice==1.1.1',
+    'pyyaml',
+    'marshmallow'
 ]
 
 setup(
