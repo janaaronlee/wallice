@@ -1,1 +1,1 @@
-from wallice.routers.implicit import ImplicitRouter
+from wallice.routers.implicit import ImplicitRouter  # noqa

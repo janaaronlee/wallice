@@ -1,1 +1,1 @@
-from wallice.app import Wallice, __version__
+from wallice.app import Wallice, __version__  # noqa

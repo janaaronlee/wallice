@@ -1,3 +1,5 @@
+import json
+
 from abc import ABC, abstractproperty, abstractmethod
 
 
@@ -16,11 +18,16 @@ class BaseRouter(ABC):
         raise NotImplementedError
 
     def add_routes(self):
-        for name, path, function, method in self:
-            self.app._add_route(path, function, methods=[method], name=name)
-
-    def __iter__(self):
+        registered_routes = {}
         for path, methods in self.routes.items():
             for method, function in methods.items():
-                name = '{}_{}'.format(path.replace('/', '_'), method)
-                yield name, path, self.wrap(function), method
+                name = '{}_{}'.format(path.replace('/', '_'), method[:-1])
+                self.app._add_route(
+                    path, self.wrap(function),
+                    methods=[method], name=name
+                )
+                registered_routes.setdefault(path, [])
+                registered_routes[path].append(method)
+
+        print('Regsistered routes:')
+        print(json.dumps(registered_routes, indent=2))
