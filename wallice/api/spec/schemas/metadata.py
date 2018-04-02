@@ -55,10 +55,52 @@ class EncodingSchema(Schema):
     allowReserved = fields.Boolean(default=False)
 
 
-# TODO
 class SchemaSchema(OptionalReferenceSchema):
 
-    pass
+    class Meta:
+        include = {
+            'not': fields.Nested('self', many=True)
+        }
+
+    title = fields.String()
+    # multipleOf
+    maximum = fields.Integer()
+    exclusiveMaximum = fields.Integer()
+    minimum = fields.Integer()
+    exclusiveMinimum = fields.Integer()
+    maxLength = fields.Integer()
+    minLength = fields.Integer()
+    pattern = fields.String()  # TODO: valid regex
+    maxItems = fields.Integer()
+    minitems = fields.Integer()
+    uniqueItems = fields.Integer()
+    maxProperties = fields.Integer()
+    minProperties = fields.Integer()
+    required = fields.List(fields.String())
+    # enum
+
+    type = fields.String()  # TODO: limit types
+    allOf = fields.Nested('self', many=True)
+    oneOf = fields.Nested('self', many=True)
+    anyOf = fields.Nested('self', many=True)
+    # items  # TODO: MUST be present if the type is array.
+    properties = DictField(
+        fields.String(),
+        fields.Nested('self')
+    )
+    # additionalProperties
+    description = fields.String()  # TODO: validate CommonMark
+    # format
+    # default
+
+    nullable = fields.Boolean(default=False)
+    # discriminator = fields.Nested(DiscriminatorSchema)
+    readOnly = fields.Boolean(default=False)
+    writeOnly = fields.Boolean(default=False)
+    # xml = fields.Nested(XmlSchema)
+    externalDocs = fields.Nested(ExternalDocumentationSchema)
+    example = fields.Field()
+    deprecated = fields.Boolean(default=False)
 
 
 class ExampleSchema(OptionalReferenceSchema):
