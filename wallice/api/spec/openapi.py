@@ -25,7 +25,6 @@ class OpenApi(object):
                 'file in `{}`! Please check the `{}` field and resolve this '
                 'error.'.format(yaml_path, error)
             )
-        print(self)
 
     @property
     def info(self):
