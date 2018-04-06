@@ -36,6 +36,12 @@ class Router(object):
 
         return wrapped
 
+    @property
+    def route_kwargs(self):
+        return {
+            'cors': os.environ.get('cors', 'false').lower() == 'true'
+        }
+
     def add_routes(self):
         registered_routes = {}
         for path, methods in self.api.paths.items():
@@ -44,7 +50,7 @@ class Router(object):
                 method = method.upper()
                 self.app._add_route(
                     path, self.init_route(path, method, config),
-                    methods=[method], name=name
+                    methods=[method], name=name, **self.route_kwargs
                 )
                 registered_routes.setdefault(path, [])
                 registered_routes[path].append(method)
