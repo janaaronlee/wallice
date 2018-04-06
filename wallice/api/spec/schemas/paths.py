@@ -28,8 +28,8 @@ class OperationSchema(Schema):
     description = fields.String()  # TODO: validate CommonMark
     externalDocs = fields.Nested(ExternalDocumentationSchema)
     operationId = fields.String()  # TODO: validate unique all
-    parameters = fields.Nested(ParameterSchema, many=True)  # no duplicates
-    requestBody = fields.Nested(RequestBodySchema)
+    # parameters = fields.Nested(ParameterSchema, many=True)  # no duplicates
+    # requestBody = fields.Nested(RequestBodySchema)
     # responses = fields.Nested(ResponsesSchema)
     # callbacks = DictField(
     #     fields.String(),
