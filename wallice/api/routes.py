@@ -36,7 +36,7 @@ class Router(object):
 
         return wrapped
 
-     @property
+    @property
     def route_kwargs(self):
         if os.environ.get('cors', 'false').lower() != 'true':
             return {}
