@@ -36,10 +36,20 @@ class Router(object):
 
         return wrapped
 
-    @property
+     @property
     def route_kwargs(self):
+        if os.environ.get('cors', 'false').lower() != 'true':
+            return {}
+
         return {
-            'cors': os.environ.get('cors', 'false').lower() == 'true'
+            'cors': CORSConfig(
+                allow_origin=os.environ.get('cors_origin', '*'),
+                allow_headers=os.environ.get(
+                    'cors_headers',
+                    'Authorization,Content-Type,'
+                    'X-Amz-Date,X-Amz-Security-Token,X-Api-Key'
+                ).split(',')
+            )
         }
 
     def add_routes(self):
