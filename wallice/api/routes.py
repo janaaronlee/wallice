@@ -1,6 +1,8 @@
 import json
 import os
 
+from chalice import CORSConfig 
+
 from wallice.api.spec import OpenApi
 from wallice.utils.introspector import walk
 
