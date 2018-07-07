@@ -1,9 +1,10 @@
 import json
 import os
 
-from chalice import CORSConfig 
+from chalice import CORSConfig
 
 from wallice.api.spec import OpenApi
+from wallice.utils.config import Config
 from wallice.utils.introspector import walk
 
 
@@ -39,20 +40,14 @@ class Router(object):
         return wrapped
 
     @property
-    def route_kwargs(self):
-        if os.environ.get('cors', 'false').lower() != 'true':
-            return {}
-
-        return {
-            'cors': CORSConfig(
-                allow_origin=os.environ.get('cors_origin', '*'),
-                allow_headers=os.environ.get(
-                    'cors_headers',
-                    'Authorization,Content-Type,'
-                    'X-Amz-Date,X-Amz-Security-Token,X-Api-Key'
-                ).split(',')
+    def route_kwargs(self, conf=Config()):
+        kwargs = {}
+        if conf['cors'] is True:
+            kwargs['cors'] = CORSConfig(
+                allow_origin=conf['cors_origin'],
+                allow_headers=conf['cors_headers']
             )
-        }
+        return kwargs
 
     def add_routes(self):
         registered_routes = {}
