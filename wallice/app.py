@@ -5,10 +5,11 @@ from chalice import Chalice
 from chalice.app import LambdaFunction
 
 from wallice.routers import ImplicitRouter
+from wallice.utils.config import Config
 from wallice.utils.introspector import walk
 
 
-__version__ = '0.1.2'
+__version__ = '0.1.3'
 
 
 class Wallice(Chalice):
@@ -16,7 +17,8 @@ class Wallice(Chalice):
     lib_dir = 'chalicelib'
 
     def __init__(self, router=ImplicitRouter, *args, **kwargs):
-        kwargs.setdefault('debug', bool(os.environ.get('debug', True)))
+        kwargs.setdefault('app_name', Config.app_name)
+        kwargs.setdefault('debug', Config.debug)
         super().__init__(*args, **kwargs)
         self.add_lambdas(self.lambdas)
         router(self)
