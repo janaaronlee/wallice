@@ -8,12 +8,12 @@ with open('README.md') as readme_file:
 
 
 install_requires = [
-    'chalice==1.1.1'
+    'chalice==1.6.0'
 ]
 
 setup(
     name='wallice',
-    version='0.1.2',
+    version='0.1.3',
     description="Opinionated AWS Lambda web framework",
     long_description=README,
     author="Jan Aaron Angelo T. Lee",
